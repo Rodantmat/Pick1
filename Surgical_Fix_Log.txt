@@ -1,0 +1,6 @@
+Surgical Fix Log
+- High-Latency Branch B implemented in connectors.js
+- Property-Key Mapping for 2026 Statcast implemented in connectors.js
+- Season-Join 2.0 implemented in connectors.js
+- 8000ms timeout applied to profile probes and Statcast fetches
+- CSS visibility override appended in styles.css
