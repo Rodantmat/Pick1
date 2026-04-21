@@ -6,6 +6,7 @@
     stream: null,
     booted: false,
     splashTimer: null,
+    splashAnimFrame: null,
   };
 
   if (state.booted) return;
@@ -20,6 +21,7 @@
   const menuLayer = document.getElementById('menuLayer');
   const cameraLayer = document.getElementById('cameraLayer');
   const cameraFeed = document.getElementById('cameraFeed');
+  const splashLoaderFill = document.getElementById('splashLoaderFill');
 
   function showScreen(name) {
     Object.entries(screens).forEach(([key, el]) => el.classList.toggle('active', key === name));
@@ -68,6 +70,12 @@
   function runSplashCheckpoint() {
     if (state.splashDone) return;
     state.splashDone = true;
+    if (splashLoaderFill) {
+      splashLoaderFill.style.width = '0%';
+      requestAnimationFrame(() => {
+        splashLoaderFill.style.width = '100%';
+      });
+    }
     window.clearTimeout(state.splashTimer);
     state.splashTimer = window.setTimeout(() => showScreen('updates'), 1700);
   }
@@ -75,6 +83,7 @@
   document.getElementById('openMenuUpdates').addEventListener('click', openMenu, { passive: true });
   document.getElementById('openMenuPickup').addEventListener('click', openMenu, { passive: true });
   document.getElementById('closeMenu').addEventListener('click', closeMenu, { passive: true });
+  document.getElementById('menuSelectPickup').addEventListener('click', () => { showScreen('pickup'); closeMenu(); }, { passive: true });
   document.getElementById('menuBackdropHotspot').addEventListener('click', closeMenu, { passive: true });
   document.getElementById('openCamera').addEventListener('click', openCamera);
   document.getElementById('openCameraAnywhere').addEventListener('click', openCamera);

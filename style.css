@@ -139,3 +139,46 @@ body {
   line-height: 1;
   z-index: 31;
 }
+
+
+.splash-loader {
+  position: absolute;
+  left: 10%;
+  top: 55.8%;
+  width: 80%;
+  pointer-events: none;
+}
+.splash-loader-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(8, 38, 56, 0.88);
+  overflow: hidden;
+}
+.splash-loader-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: #f4f7fb;
+  transition: width 1.55s linear;
+}
+.updates-anywhere-hotspot {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.menu-select-pickup {
+  left: 0;
+  top: 0;
+  width: 59%;
+  height: 100%;
+  z-index: 1;
+}
+.menu-close-hotspot,
+.menu-item-itinerary,
+.menu-item-pickup,
+.menu-item-updates,
+.menu-item-schedule,
+.menu-backdrop-hotspot {
+  z-index: 2;
+}

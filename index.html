@@ -16,11 +16,16 @@
   <main class="app-shell">
     <section class="screen active" id="screenSplash" aria-label="Splash screen">
       <img src="screen-splash.png" alt="Splash" class="screen-image">
+      <div class="splash-loader" aria-hidden="true">
+        <div class="splash-loader-track">
+          <div class="splash-loader-fill" id="splashLoaderFill"></div>
+        </div>
+      </div>
     </section>
 
     <section class="screen" id="screenUpdates" aria-label="Updates screen">
       <img src="screen-updates.png" alt="Updates" class="screen-image">
-      <button class="hotspot menu-hotspot" id="openMenuUpdates" aria-label="Open menu"></button>
+      <button class="hotspot updates-anywhere-hotspot" id="openMenuUpdates" aria-label="Open menu"></button>
     </section>
 
     <section class="screen" id="screenPickup" aria-label="Pick up screen">
@@ -32,6 +37,7 @@
 
     <aside class="menu-layer" id="menuLayer" aria-hidden="true">
       <img src="screen-menu.png" alt="Menu" class="menu-image">
+      <button class="hotspot menu-select-pickup" id="menuSelectPickup" aria-label="Open pick up screen"></button>
       <button class="hotspot menu-close-hotspot" id="closeMenu" aria-label="Close menu"></button>
       <button class="hotspot menu-item-itinerary" data-target="updates" aria-label="Today's itinerary"></button>
       <button class="hotspot menu-item-pickup" data-target="pickup" aria-label="Pick up"></button>
