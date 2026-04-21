@@ -1,7 +1,7 @@
 const splashScreen = document.getElementById('splashScreen');
 const splashProgress = document.getElementById('splashProgress');
 const homeScreen = document.getElementById('homeScreen');
-const pickupScreen = document.getElementById('pickupScreen');
+const itineraryScreen = document.getElementById('itineraryScreen');
 const menuDrawer = document.getElementById('menuDrawer');
 const drawerBackdrop = document.getElementById('drawerBackdrop');
 const menuButton = document.getElementById('menuButton');
@@ -16,14 +16,14 @@ const closeCameraButton = document.getElementById('closeCameraButton');
 
 const screens = {
   home: homeScreen,
-  pickup: pickupScreen
+  itinerary: itineraryScreen
 };
 
 let cameraStream = null;
 
-function setActiveScreen(screenKey) {
+function setActiveScreen(name) {
   Object.values(screens).forEach((screen) => screen.classList.remove('active'));
-  (screens[screenKey] || homeScreen).classList.add('active');
+  (screens[name] || homeScreen).classList.add('active');
 }
 
 function openMenu() {
@@ -38,7 +38,7 @@ function closeMenu() {
   menuDrawer.setAttribute('aria-hidden', 'true');
 }
 
-function showLoadingThen(screenKey) {
+function showLoadingThen(screenName) {
   closeMenu();
   loadingOverlay.classList.add('visible');
   loadingOverlay.setAttribute('aria-hidden', 'false');
@@ -46,7 +46,7 @@ function showLoadingThen(screenKey) {
   window.setTimeout(() => {
     loadingOverlay.classList.remove('visible');
     loadingOverlay.setAttribute('aria-hidden', 'true');
-    setActiveScreen(screenKey);
+    setActiveScreen(screenName);
   }, 1500);
 }
 
@@ -62,9 +62,7 @@ async function openCamera() {
 
   try {
     cameraStream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: { ideal: 'environment' }
-      },
+      video: { facingMode: { ideal: 'environment' } },
       audio: false
     });
 
@@ -84,6 +82,7 @@ function closeCamera() {
   cameraFeed.srcObject = null;
   cameraOverlay.classList.remove('visible');
   cameraOverlay.setAttribute('aria-hidden', 'true');
+  cameraMessage.textContent = 'Opening camera…';
 }
 
 function bootSplash() {
@@ -94,10 +93,9 @@ function bootSplash() {
   window.setTimeout(() => {
     splashScreen.classList.add('hidden');
     homeScreen.classList.add('active');
-
     window.setTimeout(() => {
       splashScreen.style.display = 'none';
-    }, 360);
+    }, 350);
   }, 2050);
 }
 
@@ -106,18 +104,18 @@ pickupMenuButton.addEventListener('click', openMenu);
 closeMenuButton.addEventListener('click', closeMenu);
 drawerBackdrop.addEventListener('click', closeMenu);
 
-Array.from(document.querySelectorAll('.menu-item')).forEach((item) => {
+Array.from(document.querySelectorAll('.drawer-item')).forEach((item) => {
   item.addEventListener('click', () => {
     const target = item.dataset.screen;
 
-    if (target === 'pickup') {
-      showLoadingThen('pickup');
+    if (target === 'itinerary') {
+      showLoadingThen('itinerary');
       return;
     }
 
     closeMenu();
 
-    if (target === 'home') {
+    if (target === 'home' || target === 'schedule') {
       setActiveScreen('home');
     }
   });
