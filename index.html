@@ -6,18 +6,18 @@
   <meta name="theme-color" content="#00435e" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Amazon Flex" />
-  <title>Amazon Flex</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="app-icon.png" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Delivery Demo" />
+  <title>Delivery Demo</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="app" class="app-shell">
     <section id="splashScreen" class="screen splash active" aria-label="Splash screen">
       <div class="splash-inner">
-        <img src="logo.png" alt="Amazon" class="splash-logo" />
+        <div class="brand-lockup" aria-label="Delivery Demo logo">
+          <div class="brand-wordmark">Delivery Demo</div>
+          <div class="brand-smile" aria-hidden="true"></div>
+        </div>
         <div class="splash-progress-track" aria-hidden="true">
           <div id="splashProgress" class="splash-progress-fill"></div>
         </div>
@@ -31,27 +31,21 @@
           <button id="menuButton" class="circle-button menu-button" aria-label="Open menu">
             <span></span><span></span><span></span>
           </button>
-          <div class="toolbar-actions">
-            <button class="pill-button info-button" aria-label="Info">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.4"></circle><line x1="12" y1="10.2" x2="12" y2="15.6"></line><circle cx="12" cy="7.2" r=".9" class="icon-fill"></circle></svg>
-            </button>
-            <button class="pill-button chat-button" aria-label="Chat">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.8 5.7h14.4v9.2H10l-5.2 3.6z"></path></svg>
-            </button>
-          </div>
+          <div class="toolbar-title">Welcome</div>
+          <div class="toolbar-actions-spacer" aria-hidden="true"></div>
         </div>
       </header>
 
       <main class="content feed-scroll">
         <article class="update-card">
           <div class="update-head">
-            <div class="update-icon flex-blue-mark" aria-hidden="true"></div>
+            <div class="update-icon delivery-mark" aria-hidden="true"></div>
             <div class="update-title-wrap">
-              <h2>Helping pet-owning customers support your safety</h2>
+              <h2>Helpful route safety updates</h2>
               <div class="update-meta">5 hrs</div>
             </div>
           </div>
-          <p class="update-body">Last week, we launched the Safe Pets, Safe Communities campaign to educate customers on actions they can take to support your safety. The goal is to help with your on-road experience—that's why we're...</p>
+          <p class="update-body">We are sharing new tips to help drivers stay aware during pick up, scanning, and on-road delivery activity.</p>
           <div class="update-readmore-link">Read more</div>
           <div class="feedback-row">
             <span class="feedback-label">Helpful?</span>
@@ -63,18 +57,17 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3.5h3.5A1.5 1.5 0 0 1 20 5v7a1.5 1.5 0 0 1-1.5 1.5H15V3.5zm-1.6 10.5-2.8 6.3c-.28.64-.98.87-1.61.56l-.7-.34c-.73-.35-1.06-1.18-.87-1.96l.79-3.06H4A1.99 1.99 0 0 1 2 13.5c0-.24.04-.48.12-.7L4.26 5.57c.24-.82 1-1.39 1.85-1.39h7.29V14z"></path></svg>
             </button>
           </div>
-          <button class="blog-link" type="button">Read more in our blog <span>›</span></button>
         </article>
 
         <article class="update-card second-card">
           <div class="update-head">
-            <div class="update-icon flex-blue-mark" aria-hidden="true"></div>
+            <div class="update-icon delivery-mark" aria-hidden="true"></div>
             <div class="update-title-wrap">
-              <h2>Making multi-location delivery stops easier</h2>
-              <div class="update-meta">April 7, 2026</div>
+              <h2>Making multi-stop deliveries easier</h2>
+              <div class="update-meta">April 21, 2026</div>
             </div>
           </div>
-          <p class="update-body">Locating packages at multi-location stops, like office buildings, can be challenging. That's why we are introducing changes to make your delivery experience at multi-location stops smoother.</p>
+          <p class="update-body">New route tools can make package lookup faster at larger buildings and busy delivery areas.</p>
           <div class="feedback-row second-row">
             <span class="feedback-label">Helpful?</span>
             <button class="feedback-button active" type="button" aria-label="Helpful thumbs up">
@@ -85,7 +78,6 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3.5h3.5A1.5 1.5 0 0 1 20 5v7a1.5 1.5 0 0 1-1.5 1.5H15V3.5zm-1.6 10.5-2.8 6.3c-.28.64-.98.87-1.61.56l-.7-.34c-.73-.35-1.06-1.18-.87-1.96l.79-3.06H4A1.99 1.99 0 0 1 2 13.5c0-.24.04-.48.12-.7L4.26 5.57c.24-.82 1-1.39 1.85-1.39h7.29V14z"></path></svg>
             </button>
           </div>
-          <button class="blog-link" type="button">Read more in our blog <span>›</span></button>
         </article>
       </main>
 
@@ -104,9 +96,12 @@
     <aside id="menuDrawer" class="menu-drawer" aria-label="Side menu" aria-hidden="true">
       <div class="menu-header">
         <button id="closeMenuButton" class="close-button" aria-label="Close menu">×</button>
-        <div class="profile-wrap">
+        <div class="profile-section">
           <img src="profile.png" alt="Profile picture" class="profile-image" />
-          <div class="profile-name">RODOLFO</div>
+          <div class="profile-copy">
+            <div class="profile-name">Rodolfo</div>
+            <div class="profile-status">Great standing</div>
+          </div>
         </div>
       </div>
       <div class="menu-items">
@@ -114,21 +109,6 @@
         <button class="menu-item" data-screen="pickup">Pick up</button>
         <button class="menu-item" data-screen="home">Updates</button>
         <button class="menu-item" data-screen="schedule">Schedule</button>
-        <button class="menu-item" data-screen="offers">Offers</button>
-        <button class="menu-item" data-screen="dashboard">Your Dashboard</button>
-        <button class="menu-item" data-screen="portal">Learning Portal</button>
-        <button class="menu-item" data-screen="calendar">Calendar</button>
-        <button class="menu-item" data-screen="earnings">Earnings</button>
-        <button class="menu-item" data-screen="healthcare">Healthcare Subsidy</button>
-        <button class="menu-item with-chevron" data-screen="settings">Settings <span>›</span></button>
-        <button class="menu-item support-item" data-screen="support">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.4c4.1 0 7.4-3.3 7.4-7.4S16.1 5.6 12 5.6 4.6 8.9 4.6 13c0 1.1.2 2.1.7 3.1l-1 3 3.2-.8c1.2.7 2.8 1.1 4.5 1.1z"></path><path d="M15.8 14.8c-.3.2-.9.4-1.2.4-.4 0-.8-.1-1.8-.5-1.3-.6-2.2-1.8-2.3-2-.1-.2-.5-.7-.5-1.3 0-.6.3-.9.4-1.1.2-.2.3-.2.5-.2h.3c.1 0 .3 0 .4.3l.5 1.2c.1.2.1.3 0 .5-.1.2-.2.3-.3.4l-.2.3c-.1.1-.2.2-.1.3.1.2.4.7 1 1.1.7.6 1.3.8 1.5.9.2.1.3 0 .4-.1l.5-.6c.1-.1.2-.2.4-.1l1.2.6c.2.1.3.2.3.3 0 .1 0 .7-.3.9z"></path></svg>
-          <span>Driver Support</span>
-        </button>
-        <button class="menu-item emergency-item" data-screen="emergency">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8 18.4 6v5.5c0 3.8-2.5 7.2-6.4 8.7-3.9-1.5-6.4-4.9-6.4-8.7V6L12 3.8z"></path><path d="M12 8v6"></path><path d="M9.4 10.6H14.6"></path></svg>
-          <span>Emergency Help</span>
-        </button>
       </div>
     </aside>
     <div id="drawerBackdrop" class="drawer-backdrop"></div>
@@ -140,38 +120,35 @@
           <button id="pickupMenuButton" class="circle-button menu-button muted" aria-label="Open menu">
             <span></span><span></span><span></span>
           </button>
+          <div class="toolbar-title toolbar-title-left">Today's itinerary</div>
+          <div class="toolbar-actions-spacer" aria-hidden="true"></div>
         </div>
       </header>
 
       <main class="pickup-content">
-        <div class="itinerary-header" aria-hidden="true"></div>
-        <img src="pickup.png" alt="Route code icon" class="pickup-hero" />
+        <div class="station-line">At the station: DDE1</div>
+        <img src="pickup.png" alt="Route code illustration" class="pickup-hero" />
         <h1>Pick up a route for a 3.5 Hour block</h1>
         <ol class="pickup-steps">
-          <li><span class="step-index">1</span><span><strong>Meet an Amazon associate</strong> for your route code</span></li>
+          <li><span class="step-index">1</span><span><strong>Meet an associate</strong> to get your route code</span></li>
           <li><span class="step-index">2</span><span><strong>Locate the rack</strong> with your assigned route</span></li>
-          <li><span class="step-index">3</span><span><strong>Scan the route code</strong> to see your route overview</span></li>
+          <li><span class="step-index">3</span><span><strong>Scan the route code</strong> to view your route overview</span></li>
         </ol>
-        <p class="pickup-warning"><span class="warning-icon">⚠</span><span>If there are no routes, <a href="#">tap here</a> to get discharged. You must do so in order to get paid</span></p>
+        <button id="scanRouteButton" class="scan-route-button" type="button">SCAN ROUTE CODE</button>
       </main>
-
-      <div class="pickup-footer">
-        <button id="scanRouteButton" class="scan-button" type="button">SCAN ROUTE CODE</button>
-      </div>
     </section>
 
     <div id="loadingOverlay" class="loading-overlay" aria-hidden="true">
-      <div class="spinner"></div>
-      <div class="loading-text">Please Wait</div>
+      <div class="loading-shell">
+        <div class="spinner" aria-hidden="true"></div>
+        <div class="loading-text">Please Wait</div>
+      </div>
     </div>
 
     <section id="cameraOverlay" class="camera-overlay" aria-hidden="true">
-      <div class="camera-stage">
-        <video id="cameraFeed" autoplay playsinline muted></video>
-        <button id="closeCameraButton" class="camera-close" type="button" aria-label="Close camera">×</button>
-        <div class="camera-guide"></div>
-        <div id="cameraMessage" class="camera-message">Opening camera…</div>
-      </div>
+      <video id="cameraFeed" class="camera-feed" autoplay playsinline muted></video>
+      <button id="closeCameraButton" class="camera-close" type="button" aria-label="Close camera">×</button>
+      <div id="cameraMessage" class="camera-message">Opening camera…</div>
     </section>
   </div>
 

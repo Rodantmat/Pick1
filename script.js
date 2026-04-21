@@ -14,11 +14,7 @@ const cameraFeed = document.getElementById('cameraFeed');
 const cameraMessage = document.getElementById('cameraMessage');
 const closeCameraButton = document.getElementById('closeCameraButton');
 
-const screens = {
-  home: homeScreen,
-  pickup: pickupScreen
-};
-
+const screens = { home: homeScreen, pickup: pickupScreen };
 let cameraStream = null;
 
 function setActiveScreen(screenKey) {
@@ -47,7 +43,7 @@ function showLoadingThen(screenKey) {
     loadingOverlay.classList.remove('visible');
     loadingOverlay.setAttribute('aria-hidden', 'true');
     setActiveScreen(screenKey);
-  }, 1150);
+  }, 1500);
 }
 
 async function openCamera() {
@@ -62,9 +58,7 @@ async function openCamera() {
 
   try {
     cameraStream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: { ideal: 'environment' }
-      },
+      video: { facingMode: { ideal: 'environment' } },
       audio: false
     });
 
@@ -109,17 +103,12 @@ drawerBackdrop.addEventListener('click', closeMenu);
 Array.from(document.querySelectorAll('.menu-item')).forEach((item) => {
   item.addEventListener('click', () => {
     const target = item.dataset.screen;
-
     if (target === 'pickup') {
       showLoadingThen('pickup');
       return;
     }
-
     closeMenu();
-
-    if (target === 'home') {
-      setActiveScreen('home');
-    }
+    if (target === 'home') setActiveScreen('home');
   });
 });
 
@@ -133,11 +122,5 @@ document.addEventListener('keydown', (event) => {
     closeCamera();
   }
 });
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js').catch(() => {});
-  });
-}
 
 bootSplash();
