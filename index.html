@@ -13,38 +13,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app">
-    <section class="screen active" id="splashScreen">
+  <main class="app" id="appRoot">
+    <section class="screen active" id="splashScreen" aria-label="Splash screen">
       <img src="splash.png" class="screen-img" alt="Splash">
-      <div class="loader-wrap">
-        <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
+      <div class="loader-wrap" aria-hidden="true">
+        <div class="loader-track"></div>
+        <div class="loader-fill" id="loaderFill"></div>
       </div>
     </section>
 
-    <section class="screen" id="updatesScreen">
+    <section class="screen" id="updatesScreen" aria-label="Updates screen">
       <img src="updates.png" class="screen-img" alt="Updates">
-      <button class="full-hit" id="updatesOpenMenu" aria-label="Open menu"></button>
+      <div class="tap-capture" id="updatesTapCapture"></div>
     </section>
 
-    <section class="screen" id="pickupScreen">
+    <section class="screen" id="pickupScreen" aria-label="Pickup screen">
       <img src="pickup.png" class="screen-img" alt="Pickup">
-      <button class="menu-hit" id="pickupOpenMenu" aria-label="Open menu"></button>
-      <button class="camera-hit" id="pickupOpenCamera" aria-label="Open camera"></button>
-      <button class="full-hit" id="pickupOpenCameraAnywhere" aria-label="Open camera anywhere"></button>
+      <div class="tap-capture" id="pickupTapCapture"></div>
     </section>
 
-    <div class="menu-shell" id="menuShell">
+    <section class="menu-shell" id="menuShell" aria-label="Menu overlay">
       <div class="menu-dim" id="menuDim"></div>
       <div class="menu-panel" id="menuPanel">
         <img src="menu.png" class="screen-img" alt="Menu">
-        <button class="menu-close-hit" id="menuClose" aria-label="Close menu"></button>
-        <button class="menu-go-pickup-hit" id="menuGoPickup" aria-label="Go to pickup"></button>
+        <button class="menu-close-hit" id="menuClose" type="button" aria-label="Close menu"></button>
+        <button class="menu-go-pickup-hit" id="menuGoPickup" type="button" aria-label="Open pickup"></button>
       </div>
-    </div>
+    </section>
 
-    <section class="camera-shell" id="cameraShell">
+    <section class="camera-shell" id="cameraShell" aria-label="Camera overlay">
       <video id="cameraVideo" autoplay playsinline muted></video>
-      <button class="camera-close" id="cameraClose" aria-label="Close camera">×</button>
+      <button class="camera-close" id="cameraClose" type="button" aria-label="Close camera">×</button>
     </section>
   </main>
   <script src="script.js"></script>

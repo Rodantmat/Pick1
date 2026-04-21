@@ -1,28 +1,29 @@
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;font-family:Arial,Helvetica,sans-serif}
 body{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+button{appearance:none;-webkit-appearance:none}
 .app{position:relative;width:100vw;height:100dvh;overflow:hidden;background:#000}
 .screen,.menu-shell,.camera-shell{position:absolute;inset:0}
-.screen{display:none}
+.screen{display:none;z-index:1}
 .screen.active{display:block}
 .screen-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;user-select:none;-webkit-user-drag:none;pointer-events:none}
-.loader-wrap{position:absolute;left:10%;top:49.8%;width:80%;z-index:5}
-.loader-track{height:8px;border-radius:999px;background:rgba(14,55,82,.78);overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.12) inset}
-.loader-fill{height:100%;width:0;background:#f7f7f7;border-radius:999px;box-shadow:0 0 8px rgba(255,255,255,.35)}
-.full-hit,.menu-hit,.camera-hit,.menu-close-hit,.menu-go-pickup-hit{position:absolute;border:0;background:transparent;z-index:20}
-.full-hit{inset:0;width:100%;height:100%}
-.menu-hit{left:0;top:0;width:22%;height:20%}
-.camera-hit{left:4%;bottom:8%;width:92%;height:10%;border-radius:20px;z-index:22}
-#pickupOpenCameraAnywhere{z-index:21}
-.menu-shell{pointer-events:none;z-index:30}
+.tap-capture{position:absolute;inset:0;z-index:5;background:transparent}
+
+.loader-wrap{position:absolute;left:9.9%;top:49.6%;width:80.4%;height:10px;z-index:10}
+.loader-track{position:absolute;inset:0;border-radius:999px;background:rgba(10,36,54,.92);box-shadow:0 0 0 1px rgba(255,255,255,.04) inset}
+.loader-fill{position:absolute;left:0;top:1px;height:8px;width:0%;border-radius:999px;background:#f6f6f6;box-shadow:0 0 8px rgba(255,255,255,.30);transition:width .08s linear}
+
+.menu-shell{z-index:30;pointer-events:none}
 .menu-shell.open{pointer-events:auto}
 .menu-dim{position:absolute;inset:0;background:rgba(0,0,0,.22);opacity:0;transition:opacity .24s ease}
-.menu-panel{position:absolute;left:0;top:0;height:100%;width:86%;transform:translateX(-102%);transition:transform .24s ease;overflow:hidden}
+.menu-panel{position:absolute;left:0;top:0;height:100%;width:85.8%;transform:translateX(-102%);transition:transform .24s ease;overflow:hidden;z-index:32;will-change:transform}
 .menu-shell.open .menu-dim{opacity:1}
 .menu-shell.open .menu-panel{transform:translateX(0)}
-.menu-close-hit{left:0;top:0;width:18%;height:15%}
-.menu-go-pickup-hit{left:0;top:14%;width:100%;height:22%}
-.camera-shell{display:none;z-index:40;background:#000}
+.menu-close-hit,.menu-go-pickup-hit{position:absolute;border:0;background:transparent;z-index:40}
+.menu-close-hit{left:0;top:0;width:18%;height:13%}
+.menu-go-pickup-hit{left:0;top:13.5%;width:100%;height:19%}
+
+.camera-shell{display:none;z-index:50;background:#000}
 .camera-shell.open{display:block}
 #cameraVideo{width:100%;height:100%;object-fit:cover;background:#000}
-.camera-close{position:absolute;left:12px;top:calc(env(safe-area-inset-top,0px) + 12px);width:54px;height:54px;border:0;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:40px;line-height:1;z-index:41}
+.camera-close{position:absolute;left:12px;top:calc(env(safe-area-inset-top,0px) + 12px);width:54px;height:54px;border:0;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:40px;line-height:1;z-index:60}

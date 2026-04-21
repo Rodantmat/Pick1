@@ -1,74 +1,125 @@
 (function(){
-  const splash=document.getElementById('splashScreen');
-  const updates=document.getElementById('updatesScreen');
-  const pickup=document.getElementById('pickupScreen');
-  const menuShell=document.getElementById('menuShell');
-  const cameraShell=document.getElementById('cameraShell');
-  const cameraVideo=document.getElementById('cameraVideo');
-  const loaderFill=document.getElementById('loaderFill');
-  let cameraStream=null;
+  'use strict';
 
-  function show(screen){
-    [splash,updates,pickup].forEach(el=>el.classList.remove('active'));
+  const splash = document.getElementById('splashScreen');
+  const updates = document.getElementById('updatesScreen');
+  const pickup = document.getElementById('pickupScreen');
+  const menuShell = document.getElementById('menuShell');
+  const menuDim = document.getElementById('menuDim');
+  const menuClose = document.getElementById('menuClose');
+  const menuGoPickup = document.getElementById('menuGoPickup');
+  const updatesTapCapture = document.getElementById('updatesTapCapture');
+  const pickupTapCapture = document.getElementById('pickupTapCapture');
+  const cameraShell = document.getElementById('cameraShell');
+  const cameraVideo = document.getElementById('cameraVideo');
+  const cameraClose = document.getElementById('cameraClose');
+  const loaderFill = document.getElementById('loaderFill');
+
+  let cameraStream = null;
+  let splashFinished = false;
+
+  function setActive(screen) {
+    splash.classList.remove('active');
+    updates.classList.remove('active');
+    pickup.classList.remove('active');
     screen.classList.add('active');
   }
-  function openMenu(){ menuShell.classList.add('open'); }
-  function closeMenu(){ menuShell.classList.remove('open'); }
-  function goPickup(){ closeMenu(); show(pickup); }
-  function goUpdates(){ closeMenu(); show(updates); }
 
-  function bindTap(id, fn){
-    const el=document.getElementById(id);
-    if(!el) return;
-    const fire=(e)=>{ e.preventDefault(); e.stopPropagation(); fn(e); };
-    ['pointerup','touchend','click'].forEach(evt=>el.addEventListener(evt, fire, {passive:false}));
+  function openMenu() {
+    menuShell.classList.add('open');
   }
 
-  function startLoader(){
-    let done=false;
-    const begin=performance.now();
-    function tick(now){
-      const p=Math.min((now-begin)/1600,1);
-      loaderFill.style.width=(p*100)+'%';
-      if(p<1){requestAnimationFrame(tick);} else if(!done){done=true; setTimeout(()=>show(updates),120);} 
-    }
-    requestAnimationFrame(tick);
+  function closeMenu() {
+    menuShell.classList.remove('open');
   }
 
-  async function openCamera(){
+  function showPickup() {
     closeMenu();
-    try{
-      if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    setActive(pickup);
+  }
+
+  function showUpdates() {
+    closeMenu();
+    setActive(updates);
+  }
+
+  async function openCamera() {
+    closeMenu();
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         alert('Camera is not available in this browser.');
         return;
       }
-      if(!cameraStream){
-        cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+      if (!cameraStream) {
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: 'environment' } },
+          audio: false
+        });
       }
-      cameraVideo.srcObject=cameraStream;
+      cameraVideo.srcObject = cameraStream;
       cameraShell.classList.add('open');
-    }catch(e){
+    } catch (err) {
       alert('Camera permission is required for this demo.');
     }
   }
-  function closeCamera(){ cameraShell.classList.remove('open'); }
 
-  bindTap('updatesOpenMenu', openMenu);
-  bindTap('pickupOpenMenu', openMenu);
-  bindTap('menuDim', closeMenu);
-  bindTap('menuClose', closeMenu);
-  bindTap('menuGoPickup', goPickup);
-  bindTap('pickupOpenCamera', openCamera);
-  bindTap('pickupOpenCameraAnywhere', openCamera);
-  bindTap('cameraClose', closeCamera);
+  function closeCamera() {
+    cameraShell.classList.remove('open');
+  }
 
-  document.addEventListener('keydown', (e)=>{
-    if(e.key==='Escape'){
-      if(cameraShell.classList.contains('open')) closeCamera();
-      else closeMenu();
+  function bindPress(el, fn) {
+    if (!el) return;
+    const handler = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fn(e);
+    };
+    el.addEventListener('click', handler, { passive: false });
+    el.addEventListener('touchend', handler, { passive: false });
+    el.addEventListener('pointerup', handler, { passive: false });
+  }
+
+  function startLoader() {
+    const duration = 1600;
+    const start = performance.now();
+    loaderFill.style.width = '0%';
+
+    function frame(now) {
+      const progress = Math.max(0, Math.min(1, (now - start) / duration));
+      loaderFill.style.width = (progress * 100).toFixed(1) + '%';
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        splashFinished = true;
+        setTimeout(showUpdates, 140);
+      }
     }
+
+    requestAnimationFrame(frame);
+  }
+
+  bindPress(updatesTapCapture, openMenu);
+  bindPress(menuDim, closeMenu);
+  bindPress(menuClose, closeMenu);
+  bindPress(menuGoPickup, showPickup);
+  bindPress(pickupTapCapture, openCamera);
+  bindPress(cameraClose, closeCamera);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    if (cameraShell.classList.contains('open')) {
+      closeCamera();
+      return;
+    }
+    closeMenu();
   });
 
-  show(splash);
+  // Fallback direct delegates for iOS/PWA oddities.
+  updates.addEventListener('click', function() { if (splashFinished) openMenu(); });
+  updates.addEventListener('touchend', function(e) { if (splashFinished) { e.preventDefault(); openMenu(); } }, { passive: false });
+  pickup.addEventListener('click', function() { openCamera(); });
+  pickup.addEventListener('touchend', function(e) { e.preventDefault(); openCamera(); }, { passive: false });
+
+  setActive(splash);
   startLoader();
 })();
