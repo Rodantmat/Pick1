@@ -6,49 +6,52 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#04526d">
-  <title>WorkFlex</title>
+  <title>WorkFlex Demo</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="app-icon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app-shell">
-    <section class="screen active" id="screenSplash" aria-label="Splash screen">
-      <img src="screen-splash.png" alt="Splash" class="screen-image">
-      <div class="splash-loader" aria-hidden="true">
-        <div class="splash-loader-track">
-          <div class="splash-loader-fill" id="splashLoaderFill"></div>
+  <main class="app" id="app">
+    <section class="screen is-active" id="screenSplash">
+      <img class="frame-img" src="screen-splash-raw.png" alt="Splash">
+      <div class="top-mask splash-mask"></div>
+      <div class="splash-bar-cover"></div>
+      <div class="live-loader" aria-hidden="true">
+        <div class="live-loader-track">
+          <div class="live-loader-fill" id="loaderFill"></div>
         </div>
       </div>
     </section>
 
-    <section class="screen" id="screenUpdates" aria-label="Updates screen">
-      <img src="screen-updates.png" alt="Updates" class="screen-image">
-      <button class="hotspot updates-anywhere-hotspot" id="openMenuUpdates" aria-label="Open menu"></button>
+    <section class="screen" id="screenUpdates">
+      <img class="frame-img" src="screen-updates-raw.png" alt="Updates">
+      <div class="top-mask teal-mask"></div>
+      <button class="tap-layer" id="updatesTap" aria-label="Open menu"></button>
     </section>
 
-    <section class="screen" id="screenPickup" aria-label="Pick up screen">
-      <img src="screen-pickup.png" alt="Pick up" class="screen-image">
-      <button class="hotspot menu-hotspot" id="openMenuPickup" aria-label="Open menu"></button>
-      <button class="hotspot camera-hotspot" id="openCamera" aria-label="Scan route code"></button>
-      <button class="hotspot pickup-anywhere-hotspot" id="openCameraAnywhere" aria-label="Open camera"></button>
+    <section class="screen" id="screenPickup">
+      <img class="frame-img" src="screen-pickup-raw.png" alt="Pickup">
+      <div class="top-mask teal-mask"></div>
+      <button class="menu-button-hit" id="pickupMenuTap" aria-label="Open menu"></button>
+      <button class="pickup-camera-hit" id="pickupCameraTap" aria-label="Open camera"></button>
+      <button class="pickup-anywhere-hit" id="pickupAnywhereTap" aria-label="Open camera anywhere"></button>
     </section>
 
-    <aside class="menu-layer" id="menuLayer" aria-hidden="true">
-      <img src="screen-menu.png" alt="Menu" class="menu-image">
-      <button class="hotspot menu-select-pickup" id="menuSelectPickup" aria-label="Open pick up screen"></button>
-      <button class="hotspot menu-close-hotspot" id="closeMenu" aria-label="Close menu"></button>
-      <button class="hotspot menu-item-itinerary" data-target="updates" aria-label="Today's itinerary"></button>
-      <button class="hotspot menu-item-pickup" data-target="pickup" aria-label="Pick up"></button>
-      <button class="hotspot menu-item-updates" data-target="updates" aria-label="Updates"></button>
-      <button class="hotspot menu-item-schedule" data-target="updates" aria-label="Schedule"></button>
-      <button class="hotspot menu-backdrop-hotspot" id="menuBackdropHotspot" aria-label="Close menu"></button>
+    <aside class="menu-shell" id="menuShell" aria-hidden="true">
+      <div class="menu-backdrop" id="menuBackdrop"></div>
+      <div class="menu-panel">
+        <img class="frame-img" src="screen-menu-raw.png" alt="Menu">
+        <div class="top-mask teal-mask"></div>
+        <button class="menu-close-hit" id="menuClose" aria-label="Close menu"></button>
+        <button class="menu-main-hit" id="menuMainHit" aria-label="Open scan route screen"></button>
+      </div>
     </aside>
 
-    <section class="camera-layer" id="cameraLayer" aria-hidden="true">
-      <video id="cameraFeed" autoplay playsinline muted></video>
-      <button class="camera-close" id="closeCamera" aria-label="Close camera">×</button>
+    <section class="camera-shell" id="cameraShell" aria-hidden="true">
+      <video id="cameraVideo" autoplay playsinline muted></video>
+      <button class="camera-close" id="cameraClose" aria-label="Close camera">×</button>
     </section>
   </main>
   <script src="script.js"></script>
