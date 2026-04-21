@@ -13,43 +13,36 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app" id="app">
-    <section class="screen is-active" id="screenSplash">
-      <img class="frame-img" src="screen-splash-raw.png" alt="Splash">
-      <div class="top-mask splash-mask"></div>
-      <div class="splash-bar-cover"></div>
-      <div class="live-loader" aria-hidden="true">
-        <div class="live-loader-track">
-          <div class="live-loader-fill" id="loaderFill"></div>
-        </div>
+  <main class="app">
+    <section class="screen active" id="splashScreen">
+      <img src="splash.png" class="screen-img" alt="Splash">
+      <div class="loader-wrap">
+        <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
       </div>
     </section>
 
-    <section class="screen" id="screenUpdates">
-      <img class="frame-img" src="screen-updates-raw.png" alt="Updates">
-      <div class="top-mask teal-mask"></div>
-      <button class="tap-layer" id="updatesTap" aria-label="Open menu"></button>
+    <section class="screen" id="updatesScreen">
+      <img src="updates.png" class="screen-img" alt="Updates">
+      <button class="full-hit" id="updatesOpenMenu" aria-label="Open menu"></button>
     </section>
 
-    <section class="screen" id="screenPickup">
-      <img class="frame-img" src="screen-pickup-raw.png" alt="Pickup">
-      <div class="top-mask teal-mask"></div>
-      <button class="menu-button-hit" id="pickupMenuTap" aria-label="Open menu"></button>
-      <button class="pickup-camera-hit" id="pickupCameraTap" aria-label="Open camera"></button>
-      <button class="pickup-anywhere-hit" id="pickupAnywhereTap" aria-label="Open camera anywhere"></button>
+    <section class="screen" id="pickupScreen">
+      <img src="pickup.png" class="screen-img" alt="Pickup">
+      <button class="menu-hit" id="pickupOpenMenu" aria-label="Open menu"></button>
+      <button class="camera-hit" id="pickupOpenCamera" aria-label="Open camera"></button>
+      <button class="full-hit" id="pickupOpenCameraAnywhere" aria-label="Open camera anywhere"></button>
     </section>
 
-    <aside class="menu-shell" id="menuShell" aria-hidden="true">
-      <div class="menu-backdrop" id="menuBackdrop"></div>
-      <div class="menu-panel">
-        <img class="frame-img" src="screen-menu-raw.png" alt="Menu">
-        <div class="top-mask teal-mask"></div>
+    <div class="menu-shell" id="menuShell">
+      <div class="menu-dim" id="menuDim"></div>
+      <div class="menu-panel" id="menuPanel">
+        <img src="menu.png" class="screen-img" alt="Menu">
         <button class="menu-close-hit" id="menuClose" aria-label="Close menu"></button>
-        <button class="menu-main-hit" id="menuMainHit" aria-label="Open scan route screen"></button>
+        <button class="menu-go-pickup-hit" id="menuGoPickup" aria-label="Go to pickup"></button>
       </div>
-    </aside>
+    </div>
 
-    <section class="camera-shell" id="cameraShell" aria-hidden="true">
+    <section class="camera-shell" id="cameraShell">
       <video id="cameraVideo" autoplay playsinline muted></video>
       <button class="camera-close" id="cameraClose" aria-label="Close camera">×</button>
     </section>

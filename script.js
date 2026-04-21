@@ -1,112 +1,74 @@
+(function(){
+  const splash=document.getElementById('splashScreen');
+  const updates=document.getElementById('updatesScreen');
+  const pickup=document.getElementById('pickupScreen');
+  const menuShell=document.getElementById('menuShell');
+  const cameraShell=document.getElementById('cameraShell');
+  const cameraVideo=document.getElementById('cameraVideo');
+  const loaderFill=document.getElementById('loaderFill');
+  let cameraStream=null;
 
-(() => {
-  const $ = (id) => document.getElementById(id);
-  const screens = {
-    splash: $('screenSplash'),
-    updates: $('screenUpdates'),
-    pickup: $('screenPickup')
-  };
+  function show(screen){
+    [splash,updates,pickup].forEach(el=>el.classList.remove('active'));
+    screen.classList.add('active');
+  }
+  function openMenu(){ menuShell.classList.add('open'); }
+  function closeMenu(){ menuShell.classList.remove('open'); }
+  function goPickup(){ closeMenu(); show(pickup); }
+  function goUpdates(){ closeMenu(); show(updates); }
 
-  const state = {
-    current: 'splash',
-    splashFinished: false,
-    cameraStream: null,
-    lock: false
-  };
-
-  const loaderFill = $('loaderFill');
-  const menuShell = $('menuShell');
-  const cameraShell = $('cameraShell');
-  const cameraVideo = $('cameraVideo');
-
-  function setScreen(name) {
-    Object.entries(screens).forEach(([key, el]) => {
-      el.classList.toggle('is-active', key === name);
-    });
-    state.current = name;
+  function bindTap(id, fn){
+    const el=document.getElementById(id);
+    if(!el) return;
+    const fire=(e)=>{ e.preventDefault(); e.stopPropagation(); fn(e); };
+    ['pointerup','touchend','click'].forEach(evt=>el.addEventListener(evt, fire, {passive:false}));
   }
 
-  function openMenu() {
-    if (cameraShell.classList.contains('is-open')) return;
-    menuShell.classList.add('is-open');
-    menuShell.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeMenu() {
-    menuShell.classList.remove('is-open');
-    menuShell.setAttribute('aria-hidden', 'true');
-  }
-
-  function animateLoader(duration = 1650) {
-    const start = performance.now();
-    loaderFill.style.width = '0%';
-
-    function step(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      loaderFill.style.width = (progress * 100).toFixed(2) + '%';
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        state.splashFinished = true;
-        setScreen('updates');
-      }
+  function startLoader(){
+    let done=false;
+    const begin=performance.now();
+    function tick(now){
+      const p=Math.min((now-begin)/1600,1);
+      loaderFill.style.width=(p*100)+'%';
+      if(p<1){requestAnimationFrame(tick);} else if(!done){done=true; setTimeout(()=>show(updates),120);} 
     }
-
-    requestAnimationFrame(step);
+    requestAnimationFrame(tick);
   }
 
-  async function openCamera() {
+  async function openCamera(){
     closeMenu();
-    try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    try{
+      if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
         alert('Camera is not available in this browser.');
         return;
       }
-      if (!state.cameraStream) {
-        state.cameraStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { ideal: 'environment' } },
-          audio: false
-        });
+      if(!cameraStream){
+        cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
       }
-      cameraVideo.srcObject = state.cameraStream;
-      cameraShell.classList.add('is-open');
-      cameraShell.setAttribute('aria-hidden', 'false');
-    } catch (err) {
+      cameraVideo.srcObject=cameraStream;
+      cameraShell.classList.add('open');
+    }catch(e){
       alert('Camera permission is required for this demo.');
     }
   }
+  function closeCamera(){ cameraShell.classList.remove('open'); }
 
-  function closeCamera() {
-    cameraShell.classList.remove('is-open');
-    cameraShell.setAttribute('aria-hidden', 'true');
-  }
+  bindTap('updatesOpenMenu', openMenu);
+  bindTap('pickupOpenMenu', openMenu);
+  bindTap('menuDim', closeMenu);
+  bindTap('menuClose', closeMenu);
+  bindTap('menuGoPickup', goPickup);
+  bindTap('pickupOpenCamera', openCamera);
+  bindTap('pickupOpenCameraAnywhere', openCamera);
+  bindTap('cameraClose', closeCamera);
 
-  $('updatesTap').addEventListener('click', openMenu);
-  $('pickupMenuTap').addEventListener('click', (e) => {
-    e.stopPropagation();
-    openMenu();
-  });
-  $('menuClose').addEventListener('click', closeMenu);
-  $('menuBackdrop').addEventListener('click', closeMenu);
-  $('menuMainHit').addEventListener('click', () => {
-    closeMenu();
-    setScreen('pickup');
-  });
-
-  $('pickupCameraTap').addEventListener('click', (e) => {
-    e.stopPropagation();
-    openCamera();
-  });
-  $('pickupAnywhereTap').addEventListener('click', openCamera);
-  $('cameraClose').addEventListener('click', closeCamera);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (cameraShell.classList.contains('is-open')) closeCamera();
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='Escape'){
+      if(cameraShell.classList.contains('open')) closeCamera();
       else closeMenu();
     }
   });
 
-  setScreen('splash');
-  animateLoader();
+  show(splash);
+  startLoader();
 })();
