@@ -1,110 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#00435e" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Amazon Flex" />
-  <title>Amazon Flex</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="app-icon.png" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#04526d">
+  <title>WorkFlex</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="app-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="app" class="app-shell">
-  <section id="splashScreen" class="screen splash-screen active" aria-label="Splash screen">
-    <img src="logo-white.png" alt="Amazon" class="splash-logo" />
-    <div class="splash-progress-track" aria-hidden="true"><div id="splashProgress" class="splash-progress-fill"></div></div>
-  </section>
+  <main class="app-shell">
+    <section class="screen active" id="screenSplash" aria-label="Splash screen">
+      <img src="screen-splash.png" alt="Splash" class="screen-image">
+    </section>
 
-  <section id="homeScreen" class="screen app-screen" aria-label="Updates screen">
-    <header class="app-header">
-      <div class="top-safe"></div>
-      <div class="toolbar">
-        <button id="menuButton" class="menu-button" aria-label="Open menu"><span></span><span></span><span></span></button>
-        <div class="toolbar-right">
-          <button class="toolbar-pill" aria-label="Information"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.7"/><line x1="12" y1="10" x2="12" y2="16"/><circle cx="12" cy="7.2" r=".95" class="fill-dot"/></svg></button>
-          <button class="toolbar-pill" aria-label="Messages"><svg viewBox="0 0 24 24"><path d="M4.5 6.3h15v8.6h-8.1l-4.5 3v-3H4.5z"/></svg></button>
-        </div>
-      </div>
-    </header>
-    <main class="main-scroll">
-      <article class="news-card">
-        <div class="news-head">
-          <div class="news-mark"></div>
-          <div class="news-meta"><h2>Helping pet-owning customers support your safety</h2><div class="news-time">5 hrs</div></div>
-        </div>
-        <p>Last week, we launched the Safe Pets, Safe Communities campaign to educate customers on actions they can take to support your safety. The goal is to help with your on-road experience—that's why we're...</p>
-        <button class="read-more" type="button">Read more</button>
-        <div class="helpful-row">
-          <div class="helpful-label">Helpful?</div>
-          <button class="feedback-btn"><svg viewBox="0 0 24 24"><path d="M9 20H6.7c-.9 0-1.7-.8-1.7-1.7v-7c0-.9.8-1.6 1.7-1.6H9"/><path d="M10 11V7.7c0-1.5 1-2.7 2.2-2.7.6 0 1 .5 1 1.1v3h4.1c1 0 1.8.9 1.6 1.9l-1.2 6.2c-.1.8-.8 1.3-1.6 1.3H10z"/></svg><span>6.9k</span></button>
-          <button class="feedback-btn icon-only"><svg viewBox="0 0 24 24"><path d="M15 4h2.3c.9 0 1.7.8 1.7 1.7v7c0 .9-.8 1.6-1.7 1.6H15"/><path d="M14 13v3.3c0 1.5-1 2.7-2.2 2.7-.6 0-1-.5-1-1.1v-3H6.7c-1 0-1.8-.9-1.6-1.9l1.2-6.2C6.4 6 7.1 5.5 7.9 5.5H14z"/></svg></button>
-        </div>
-      </article>
-      <button class="blog-row" type="button"><span>Read more in our blog</span><span class="blog-arrow">›</span></button>
-      <article class="news-card news-card-secondary">
-        <div class="news-head">
-          <div class="news-mark"></div>
-          <div class="news-meta"><h2>Making multi-location delivery stops easier</h2><div class="news-time">April 7, 2026</div></div>
-        </div>
-        <p>Locating packages at multi-location stops, like office buildings, can be challenging. That's why we are introducing changes to make your delivery experience at multi-location stops smoother.</p>
-        <div class="helpful-row">
-          <div class="helpful-label">Helpful?</div>
-          <button class="feedback-btn"><svg viewBox="0 0 24 24"><path d="M9 20H6.7c-.9 0-1.7-.8-1.7-1.7v-7c0-.9.8-1.6 1.7-1.6H9"/><path d="M10 11V7.7c0-1.5 1-2.7 2.2-2.7.6 0 1 .5 1 1.1v3h4.1c1 0 1.8.9 1.6 1.9l-1.2 6.2c-.1.8-.8 1.3-1.6 1.3H10z"/></svg><span>55.6k</span></button>
-          <button class="feedback-btn icon-only"><svg viewBox="0 0 24 24"><path d="M15 4h2.3c.9 0 1.7.8 1.7 1.7v7c0 .9-.8 1.6-1.7 1.6H15"/><path d="M14 13v3.3c0 1.5-1 2.7-2.2 2.7-.6 0-1-.5-1-1.1v-3H6.7c-1 0-1.8-.9-1.6-1.9l1.2-6.2C6.4 6 7.1 5.5 7.9 5.5H14z"/></svg></button>
-        </div>
-      </article>
-      <button class="blog-row" type="button"><span>Read more in our blog</span><span class="blog-arrow">›</span></button>
-      <div class="scroll-spacer"></div>
-    </main>
-    <nav class="bottom-nav" aria-label="Bottom navigation">
-      <button class="bottom-item active" type="button"><svg viewBox="0 0 24 24"><rect x="6" y="4.5" width="12" height="15" rx="1.1"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg><span>Updates</span></button>
-      <button class="bottom-item" type="button"><svg viewBox="0 0 24 24"><rect x="4.5" y="5.5" width="15" height="14" rx="1.1"/><line x1="8" y1="3.5" x2="8" y2="7"/><line x1="16" y1="3.5" x2="16" y2="7"/><line x1="4.5" y1="10" x2="19.5" y2="10"/></svg><span>Schedule</span></button>
-    </nav>
-  </section>
+    <section class="screen" id="screenUpdates" aria-label="Updates screen">
+      <img src="screen-updates.png" alt="Updates" class="screen-image">
+      <button class="hotspot menu-hotspot" id="openMenuUpdates" aria-label="Open menu"></button>
+    </section>
 
-  <section id="itineraryScreen" class="screen app-screen" aria-label="Pick up screen">
-    <header class="app-header"><div class="top-safe"></div><div class="toolbar toolbar-single"><button id="pickupMenuButton" class="menu-button muted" aria-label="Open menu"><span></span><span></span><span></span></button></div></header>
-    <main class="itinerary-scroll">
-      <div class="pickup-panel">
-        <img src="pickup.png" alt="Route code" class="pickup-hero" />
-        <h1 class="pickup-title">Pick up a route for a 3.5 Hour block</h1>
-        <ol class="pickup-steps">
-          <li><span class="step-index">1</span><span><strong>Meet an Amazon associate</strong> for your route code</span></li>
-          <li><span class="step-index">2</span><span><strong>Locate the rack</strong> with your assigned route</span></li>
-          <li><span class="step-index">3</span><span><strong>Scan the route code</strong> to see your route overview</span></li>
-        </ol>
-        <p class="pickup-warning"><span class="warning-icon">⚠</span><span><strong>If there are no routes, <a href="#">tap here</a> to get discharged.</strong> You must do so in order to get paid</span></p>
-      </div>
-    </main>
-    <footer class="scan-footer"><button id="scanRouteButton" class="scan-button" type="button">SCAN ROUTE CODE</button></footer>
-  </section>
+    <section class="screen" id="screenPickup" aria-label="Pick up screen">
+      <img src="screen-pickup.png" alt="Pick up" class="screen-image">
+      <button class="hotspot menu-hotspot" id="openMenuPickup" aria-label="Open menu"></button>
+      <button class="hotspot camera-hotspot" id="openCamera" aria-label="Scan route code"></button>
+      <button class="hotspot pickup-anywhere-hotspot" id="openCameraAnywhere" aria-label="Open camera"></button>
+    </section>
 
-  <aside id="menuDrawer" class="menu-drawer" aria-hidden="true">
-    <div class="drawer-top-safe"></div>
-    <div class="drawer-header">
-      <button id="closeMenuButton" class="drawer-close" aria-label="Close menu">×</button>
-      <div class="profile-section"><div class="profile-avatar-shell"><img src="profile.png" alt="Rodolfo profile" class="profile-avatar" /></div><div class="profile-name">RODOLFO</div></div>
-    </div>
-    <nav class="drawer-nav" aria-label="Menu">
-      <button class="drawer-item" data-screen="itinerary">Today's itinerary</button>
-      <button class="drawer-item" data-screen="itinerary">Pick up</button>
-      <button class="drawer-item" data-screen="home">Updates</button>
-      <button class="drawer-item" data-screen="schedule">Schedule</button>
-      <button class="drawer-item">Offers</button><button class="drawer-item">Your Dashboard</button><button class="drawer-item">Learning Portal</button><button class="drawer-item">Calendar</button><button class="drawer-item">Earnings</button><button class="drawer-item">Healthcare Subsidy</button>
-      <button class="drawer-item settings-item">Settings <span>›</span></button>
-      <button class="drawer-item icon-item"><span class="drawer-mini-icon support-icon">◔</span> Driver Support</button>
-      <button class="drawer-item icon-item"><span class="drawer-mini-icon emergency-icon">✦</span> Emergency Help</button>
-    </nav>
-  </aside>
-  <div id="drawerBackdrop" class="drawer-backdrop"></div>
-  <div id="loadingOverlay" class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
-  <section id="cameraOverlay" class="camera-overlay" aria-hidden="true"><video id="cameraFeed" class="camera-feed" autoplay playsinline muted></video><button id="closeCameraButton" class="camera-close" type="button" aria-label="Close camera">×</button><div class="camera-guide"></div><div id="cameraMessage" class="camera-message">Opening camera…</div></section>
-</div>
-<script src="script.js"></script>
+    <aside class="menu-layer" id="menuLayer" aria-hidden="true">
+      <img src="screen-menu.png" alt="Menu" class="menu-image">
+      <button class="hotspot menu-close-hotspot" id="closeMenu" aria-label="Close menu"></button>
+      <button class="hotspot menu-item-itinerary" data-target="updates" aria-label="Today's itinerary"></button>
+      <button class="hotspot menu-item-pickup" data-target="pickup" aria-label="Pick up"></button>
+      <button class="hotspot menu-item-updates" data-target="updates" aria-label="Updates"></button>
+      <button class="hotspot menu-item-schedule" data-target="updates" aria-label="Schedule"></button>
+      <button class="hotspot menu-backdrop-hotspot" id="menuBackdropHotspot" aria-label="Close menu"></button>
+    </aside>
+
+    <section class="camera-layer" id="cameraLayer" aria-hidden="true">
+      <video id="cameraFeed" autoplay playsinline muted></video>
+      <button class="camera-close" id="closeCamera" aria-label="Close camera">×</button>
+    </section>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
